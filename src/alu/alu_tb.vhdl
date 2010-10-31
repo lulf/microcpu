@@ -17,10 +17,34 @@ begin  -- architecture rtl
   
   process
   begin
+    -- Test AND
     a_in.in_a <= X"6";
     a_in.in_b <= X"4";
+    a_in.in_op <= OP_AND;
     wait for 1 ns;
     assert a_out.result = X"4" report "AND operation not correct" severity failure;
+    assert a_out.status = X"0" report "AND operating gives wrong status" severity failure;
+    -- Test OR
+    a_in.in_a <= X"6";
+    a_in.in_b <= X"4";
+    a_in.in_op <= OP_OR;
+    wait for 1 ns;
+    assert a_out.result = X"6" report "OR operation gives wrong result" severity failure;
+
+    -- Test ZERO flag
+    a_in.in_a <= X"8";
+    a_in.in_b <= X"4";
+    a_in.in_op <= OP_AND;
+    wait for 1 ns;
+    assert a_out.status = STATUS_ZERO report "ZERO status flag not set" severity failure;
+
+    -- Test INVALID operation flag
+    a_in.in_a <= X"8";
+    a_in.in_b <= X"4";
+    a_in.in_op <= X"0";
+    wait for 1 ns;
+    assert a_out.status = (STATUS_INVOP or STATUS_ZERO) report "INVALID operation flag not set" severity failure;
+    
     assert false report "end of test" severity note;
     wait;
   end process;   
