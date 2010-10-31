@@ -18,7 +18,7 @@ begin  -- architecture rtl
   -- inputs : input
   -- outputs: output
   main: process (input) is
-    variable status : std_logic_vector(3 downto 0);
+    variable status : std_logic_vector(STATUS_WIDTH - 1  downto 0);
     variable result : std_logic_vector(WIDTH - 1 downto 0);
   begin  -- process main
     -- Default values
