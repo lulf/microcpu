@@ -39,7 +39,7 @@ begin  -- architecture rtl
     -- Test SUB 
     a_in.in_a <= X"4";
     a_in.in_b <= X"3";
-    a_in.in_op <= OP_ADD;
+    a_in.in_op <= OP_SUB;
     wait for 1 ns;
     assert a_out.result = X"1" report "SUB operation gives wrong result" severity failure;
 
