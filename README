@@ -1,0 +1,4 @@
+MicroCPU is a VHDL soft core CPU project with the following goals:
+* Provide a clean and simple CPU design which can be extended for new features.
+* Simple pipeline with few steps.
+* Support interrupt and exception handling.
