@@ -30,6 +30,16 @@ begin  -- architecture rtl
         result := input.in_a and input.in_b;
       when OP_OR =>
         result := input.in_a or input.in_b;
+      when OP_ADD =>
+        result := std_logic_vector(signed(input.in_a) + signed(input.in_b));
+        if ((input.in_a'high = input.in_b'high) and (input.in_a'high /= result'high)) then
+          status := status or STATUS_OVERFLOW;
+        end if;
+      when OP_SUB =>
+        result := std_logic_vector(signed(input.in_a) - signed(input.in_b));
+        if ((input.in_a'high = input.in_b'high) and (input.in_a'high /= result'high)) then
+          status := status or STATUS_OVERFLOW;
+        end if;
       when others =>
         result := X"0";
         status := status or STATUS_INVOP;

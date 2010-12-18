@@ -9,9 +9,11 @@ package alu_pkg is
   constant OP_AND : std_logic_vector(OP_WIDTH - 1 downto 0) := X"1";
   constant OP_OR  : std_logic_vector(OP_WIDTH - 1 downto 0) := X"2";
   constant OP_ADD : std_logic_vector(OP_WIDTH - 1 downto 0) := X"3";
+  constant OP_SUB : std_logic_vector(OP_WIDTH - 1 downto 0) := X"4";
 
-  constant STATUS_INVOP : std_logic_vector(STATUS_WIDTH - 1 downto 0) := X"1";  -- Invalid operation
-  constant STATUS_ZERO : std_logic_vector(STATUS_WIDTH - 1 downto 0) := X"2";   -- Zero result
+  constant STATUS_INVOP    : std_logic_vector(STATUS_WIDTH - 1 downto 0) := X"1";  -- Invalid operation
+  constant STATUS_ZERO     : std_logic_vector(STATUS_WIDTH - 1 downto 0) := X"2";  -- Zero result
+  constant STATUS_OVERFLOW : std_logic_vector(STATUS_WIDTH - 1 downto 0) := X"3";  -- Overflow/carry
   
   type alu_input is record
     in_a : std_logic_vector(WIDTH - 1 downto 0);
