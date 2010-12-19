@@ -43,6 +43,15 @@ begin  -- architecture rtl
     wait for 1 ns;
     assert a_out.result = X"1" report "SUB operation gives wrong result" severity failure;
 
+
+    -- Test OVERFLOW flag
+    a_in.in_a <= X"7";
+    a_in.in_b <= X"2";
+    a_in.in_op <= OP_ADD;
+    wait for 1 ns;
+    assert a_out.result = X"9" report "ADD operation gives wrong result" severity failure;
+    assert a_out.status = STATUS_OVERFLOW report "OVERFLOW status flag not set" severity failure;
+
     -- Test ZERO flag
     a_in.in_a <= X"8";
     a_in.in_b <= X"4";
