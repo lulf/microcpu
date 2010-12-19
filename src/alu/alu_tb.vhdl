@@ -42,7 +42,31 @@ begin  -- architecture rtl
     a_in.in_op <= OP_SUB;
     wait for 1 ns;
     assert a_out.result = X"1" report "SUB operation gives wrong result" severity failure;
-
+    -- Test SHIFT_LOGICAL_LEFT
+    a_in.in_a <= X"4";
+    a_in.in_b <= X"1";
+    a_in.in_op <= OP_SHIFT_LOGICAL_LEFT;
+    wait for 1 ns;
+    assert a_out.result = X"8" report "SHIFT_LOGICAL_LEFT operation gives wrong result" severity failure;
+    -- Test SHIFT_LOGICAL_RIGHT
+    a_in.in_a <= X"4";
+    a_in.in_b <= X"1";
+    a_in.in_op <= OP_SHIFT_LOGICAL_RIGHT;
+    wait for 1 ns;
+    assert a_out.result = X"2" report "SHIFT_LOGICAL_RIGHT operation gives wrong result" severity failure;
+    -- Test SHIFT_ARITH_LEFT
+    a_in.in_a <= X"7";
+    a_in.in_b <= X"1";
+    a_in.in_op <= OP_SHIFT_ARITH_LEFT;
+    wait for 1 ns;
+    assert a_out.result = X"8" report "SHIFT_ARITH_LEFT operation gives wrong result" severity failure;
+    assert a_out.status = STATUS_OVERFLOW report "OVERFLOW status flag not set" severity failure;
+    -- Test SHIFT_ARITH_RIGHT
+    a_in.in_a <= X"F";
+    a_in.in_b <= X"1";
+    a_in.in_op <= OP_SHIFT_ARITH_RIGHT;
+    wait for 1 ns;
+    assert a_out.result = X"F" report "SHIFT_ARITH_RIGHT operation gives wrong result" severity failure;
 
     -- Test OVERFLOW flag
     a_in.in_a <= X"7";
