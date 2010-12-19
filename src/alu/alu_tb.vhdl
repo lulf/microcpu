@@ -59,7 +59,7 @@ begin  -- architecture rtl
     a_in.in_b <= X"1";
     a_in.in_op <= OP_SHIFT_ARITH_LEFT;
     wait for 1 ns;
-    assert a_out.result = X"8" report "SHIFT_ARITH_LEFT operation gives wrong result" severity failure;
+    assert a_out.result = X"E" report "SHIFT_ARITH_LEFT operation gives wrong result" severity failure;
     assert a_out.status = STATUS_OVERFLOW report "OVERFLOW status flag not set" severity failure;
     -- Test SHIFT_ARITH_RIGHT
     a_in.in_a <= X"F";
