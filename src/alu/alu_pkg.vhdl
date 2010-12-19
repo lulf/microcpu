@@ -6,11 +6,18 @@ package alu_pkg is
   constant WIDTH  : integer := 4;
   constant OP_WIDTH : integer := 4;
   constant STATUS_WIDTH : integer := 4;
+
+  -- Op codes for ALU operations supported.
   constant OP_AND : std_logic_vector(OP_WIDTH - 1 downto 0) := X"1";
   constant OP_OR  : std_logic_vector(OP_WIDTH - 1 downto 0) := X"2";
   constant OP_ADD : std_logic_vector(OP_WIDTH - 1 downto 0) := X"3";
   constant OP_SUB : std_logic_vector(OP_WIDTH - 1 downto 0) := X"4";
+  constant OP_SHIFT_LOGICAL_LEFT  : std_logic_vector(OP_WIDTH - 1 downto 0) := X"5";
+  constant OP_SHIFT_LOGICAL_RIGHT : std_logic_vector(OP_WIDTH - 1 downto 0) := X"6";
+  constant OP_SHIFT_ARITH_LEFT    : std_logic_vector(OP_WIDTH - 1 downto 0) := X"7";
+  constant OP_SHIFT_ARITH_RIGHT   : std_logic_vector(OP_WIDTH - 1 downto 0) := X"8";
 
+  -- Status flags set by ALU.
   constant STATUS_INVOP    : std_logic_vector(STATUS_WIDTH - 1 downto 0) := X"1";  -- Invalid operation
   constant STATUS_ZERO     : std_logic_vector(STATUS_WIDTH - 1 downto 0) := X"2";  -- Zero result
   constant STATUS_OVERFLOW : std_logic_vector(STATUS_WIDTH - 1 downto 0) := X"4";  -- Overflow/carry
