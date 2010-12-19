@@ -45,6 +45,17 @@ begin  -- architecture rtl
         if input_a(input_a'high) = input_b(input_b'high) and input_a(input_a'high) /= result(result'high) then
           status := status or STATUS_OVERFLOW;
         end if;
+      when OP_SHIFT_LOGICAL_LEFT =>
+        result := std_logic_vector(shift_left(unsigned(input_a), to_integer(unsigned(input_b))));
+      when OP_SHIFT_LOGICAL_RIGHT =>
+        result := std_logic_vector(shift_right(unsigned(input_a), to_integer(unsigned(input_b))));
+      when OP_SHIFT_ARITH_LEFT =>
+        result := std_logic_vector(shift_left(signed(input_a), to_integer(unsigned(input_b))));
+        if input_a(input_a'high) /= result(result'high) then
+          status := status or STATUS_OVERFLOW;
+        end if;
+      when OP_SHIFT_ARITH_RIGHT =>
+        result := std_logic_vector(shift_right(signed(input_a), to_integer(unsigned(input_b))));
       when others =>
         result := (others => '0');
         status := status or STATUS_INVOP;
