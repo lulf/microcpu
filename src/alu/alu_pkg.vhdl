@@ -13,7 +13,7 @@ package alu_pkg is
 
   constant STATUS_INVOP    : std_logic_vector(STATUS_WIDTH - 1 downto 0) := X"1";  -- Invalid operation
   constant STATUS_ZERO     : std_logic_vector(STATUS_WIDTH - 1 downto 0) := X"2";  -- Zero result
-  constant STATUS_OVERFLOW : std_logic_vector(STATUS_WIDTH - 1 downto 0) := X"3";  -- Overflow/carry
+  constant STATUS_OVERFLOW : std_logic_vector(STATUS_WIDTH - 1 downto 0) := X"4";  -- Overflow/carry
   
   type alu_input is record
     in_a : std_logic_vector(WIDTH - 1 downto 0);
