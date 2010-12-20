@@ -1,0 +1,26 @@
+Instruction set architecture of microcpu:
+ADD | 0
+SUB
+SLL
+SRL
+SLA
+SRA
+LOAD
+STORE
+
+
+Data/memory design:
+All registers and data are partitioned over all core instances. An instruction
+can only refer to data or registers belonging to one core. However, an
+instruction may refer to register and data belonging to another core. In that
+case, the instruction may store data in a local register. For example:
+
+Core1: R1, R2
+Core2: R3, R4
+Instruction format: ADD DEST, OP1, OP2
+
+This is an invalid instruction: ADD R3, R1, R4
+This is a valid instruction: ADD R3, R1, R2
+
+The last (valid) instruction will forward the instruction from Core1 to Core2,
+perform the computation on Core2, and return the result to Core1.
