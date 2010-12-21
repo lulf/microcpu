@@ -22,5 +22,10 @@ Instruction format: ADD DEST, OP1, OP2
 This is an invalid instruction: ADD R3, R1, R4
 This is a valid instruction: ADD R3, R1, R2
 
+
+This, however, requires, either that the data must be loaded into a remote cores
+register automatically on computation, or that is must be loaded explicitly with
+a remote load instruction.
+
 The last (valid) instruction will forward the instruction from Core1 to Core2,
 perform the computation on Core2, and return the result to Core1.
