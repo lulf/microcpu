@@ -1,8 +1,8 @@
 Instruction set architecture of microcpu:
-ADD | 0
-SUB
-SLL
-SRL
+ADD D1, R1, R2
+SUB D1, R1, R2
+SLL D1, R1, R2
+SRL D1, R1, R2
 SLA
 SRA
 LOAD

@@ -1,6 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
+-- A simple ALU supporting basic arithmetic operations except multiplication and division. More operations will be added when needed.
 package alu_pkg is
   
   constant WIDTH  : integer := 4;
