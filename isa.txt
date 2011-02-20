@@ -1,14 +1,13 @@
-Instruction set architecture of microcpu:
+Instruction set architecture of microcpu so far:
 ADD D1, R1, R2
 SUB D1, R1, R2
 SLL D1, R1, R2
 SRL D1, R1, R2
-SLA
-SRA
-LOAD
-STORE
+LOAD D1, ADDR
+STORE ADDR, R1
 
 
+Distributed core design:
 Data/memory design:
 All registers and data are partitioned over all core instances. An instruction
 can only refer to data or registers belonging to one core. However, an
