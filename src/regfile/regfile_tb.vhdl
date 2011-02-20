@@ -8,9 +8,9 @@ end entity regfile_tb;
 architecture rtl of regfile_tb is
   signal r_in : regfile_input;
   signal r_out : regfile_output;
-  signal clk_i : std_logic;
-  signal reset_i : std_logic;
-
+  signal clk_i : std_logic := '0';
+  signal reset_i : std_logic := '1';
+  signal numcycles : integer := 2000;
   
 begin  -- architecture rtl
   regfile_0 : regfile_impl
@@ -24,7 +24,7 @@ begin  -- architecture rtl
   test : process
   begin
     reset_i <= '1';
-    wait for 100 ns;
+    wait until rising_edge(clk_i);
     reset_i <= '0';
     r_in.in_addr_r1 <= X"0";
     r_in.in_addr_r2 <= X"0";
@@ -34,7 +34,7 @@ begin  -- architecture rtl
 
     -- Test basic READ
     r_in.in_addr_r1 <= X"1";
-    wait for 100 ns;
+    wait until rising_edge(clk_i);
     assert r_out.out_data_r1 = X"0" report "READ register 1 gives wrong result" severity failure;
 
     -- Test basic WRITE
@@ -42,7 +42,7 @@ begin  -- architecture rtl
     r_in.in_addr_w1 <= X"2";
     r_in.in_data_w1 <= X"7";
     r_in.in_addr_r1 <= X"2";
-    wait for 100 ns;
+    wait until rising_edge(clk_i);
     assert r_out.out_data_r1 = X"7" report "Write register 2 does not result in value update" severity failure;
 
     -- Test that reg 0 is special
@@ -50,19 +50,21 @@ begin  -- architecture rtl
     r_in.in_addr_w1 <= X"0";
     r_in.in_data_w1 <= X"3";
     r_in.in_addr_r1 <= X"0";
-    wait for 100 ns;
+    wait until rising_edge(clk_i);
     assert r_out.out_data_r1 = X"0" report "Register 0 is not special, can be written to" severity failure;
-
+    assert false report "end of test" severity note;
+    wait;
   end process;   
 
   clksource : process
   begin
-    while true loop
-      clk_i <= '0';
+    for i in 1 to numcycles loop
+      clk_i <= not clk_i;
       wait for 50 ns;
-      clk_i <= '1';
+      clk_i <= not clk_i;
       wait for 50 ns;
     end loop;
+    wait;
   end process;
 
 end architecture rtl;
