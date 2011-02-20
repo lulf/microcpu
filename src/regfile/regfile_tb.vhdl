@@ -10,7 +10,7 @@ architecture rtl of regfile_tb is
   signal r_out : regfile_output;
   signal clk_i : std_logic := '0';
   signal reset_i : std_logic := '1';
-  signal numcycles : integer := 2000;
+  signal numcycles : integer := 10;
   
 begin  -- architecture rtl
   regfile_0 : regfile_impl
