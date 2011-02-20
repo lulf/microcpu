@@ -23,14 +23,15 @@ begin  -- architecture rtl
 
   test : process
   begin
-    reset_i <= '1';
-    wait until rising_edge(clk_i);
-    reset_i <= '0';
     r_in.in_addr_r1 <= X"0";
     r_in.in_addr_r2 <= X"0";
     r_in.in_addr_w1 <= X"0";
     r_in.in_data_w1 <= X"0";
     r_in.in_write_enable <= '0';
+
+    reset_i <= '1';
+    wait until rising_edge(clk_i);
+    reset_i <= '0';
 
     -- Test basic READ
     r_in.in_addr_r1 <= X"1";

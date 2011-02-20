@@ -34,84 +34,14 @@ begin  -- architecture rtl
     elsif rising_edge(clk) then
       -- Set all register values;
       if input.in_write_enable = '1' then
-        case input.in_addr_w1 is
-          when X"0" =>
-            null;
-          when X"1" =>
-            regfile(1) <= input.in_data_w1;
-          when X"2" =>
-            regfile(2) <= input.in_data_w1;
-          when X"3" =>
-            regfile(3) <= input.in_data_w1;
-          when X"4" =>
-            regfile(4) <= input.in_data_w1;
-          when X"5" =>
-            regfile(5) <= input.in_data_w1;
-          when X"6" =>
-            regfile(6) <= input.in_data_w1;
-          when X"7" =>
-            regfile(7) <= input.in_data_w1;
-          when X"8" =>
-            regfile(8) <= input.in_data_w1;
-          when X"9" =>
-            regfile(9) <= input.in_data_w1;
-          when X"A" =>
-            regfile(10) <= input.in_data_w1;
-          when X"B" =>
-            regfile(11) <= input.in_data_w1;
-          when X"C" =>
-            regfile(12) <= input.in_data_w1;
-          when X"D" =>
-            regfile(13) <= input.in_data_w1;
-          when X"E" =>
-            regfile(14) <= input.in_data_w1;
-          when X"F" =>
-            regfile(15) <= input.in_data_w1;
-          when others =>
-            null;
-        end case;
+          if input.in_addr_w1 /= X"0" then
+            regfile(to_integer(unsigned(input.in_addr_w1))) <= input.in_data_w1;
+          end if;
       end if;
     end if;
   end process;
 
-  -- Read input r1
-  with input.in_addr_r1 select output.out_data_r1 <=
-    regfile(0) when X"0",
-    regfile(1) when X"1",
-    regfile(2) when X"2",
-    regfile(3) when X"3",
-    regfile(4) when X"4",
-    regfile(5) when X"5",
-    regfile(6) when X"6",
-    regfile(7) when X"7",
-    regfile(8) when X"8",
-    regfile(9) when X"9",
-    regfile(10) when X"A",
-    regfile(11) when X"B",
-    regfile(12) when X"C",
-    regfile(13) when X"D",
-    regfile(14) when X"E",
-    regfile(15) when X"F",
-    (others => '0') when others;
-
-  -- Read input r2
-  with input.in_addr_r2 select output.out_data_r2 <=
-    regfile(0) when X"0",
-    regfile(1) when X"1",
-    regfile(2) when X"2",
-    regfile(3) when X"3",
-    regfile(4) when X"4",
-    regfile(5) when X"5",
-    regfile(6) when X"6",
-    regfile(7) when X"7",
-    regfile(8) when X"8",
-    regfile(9) when X"9",
-    regfile(10) when X"A",
-    regfile(11) when X"B",
-    regfile(12) when X"C",
-    regfile(13) when X"D",
-    regfile(14) when X"E",
-    regfile(15) when X"F",
-    (others => '0') when others;
+  output.out_data_r1 <= regfile(to_integer(unsigned(input.in_addr_r1)));
+  output.out_data_r2 <= regfile(to_integer(unsigned(input.in_addr_r2)));
 
 end architecture rtl;
