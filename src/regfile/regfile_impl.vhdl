@@ -41,6 +41,7 @@ begin  -- architecture rtl
     end if;
   end process;
 
+  -- Gives metainstability... should perhaps have enable and/or input check.
   output.out_data_r1 <= regfile(to_integer(unsigned(input.in_addr_r1)));
   output.out_data_r2 <= regfile(to_integer(unsigned(input.in_addr_r2)));
 
