@@ -10,6 +10,8 @@ package regfile_pkg is
   constant OP_WRITE : std_logic := '1';
 
   type regfile_input is record
+    in_clk : std_logic;
+    in_reset : std_logic;
     in_addr : std_logic_vector(ADDR_WIDTH - 1 downto 0);
     in_data : std_logic_vector(REG_WIDTH - 1 downto 0);
     in_op : std_logic;
