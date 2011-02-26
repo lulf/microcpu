@@ -41,10 +41,14 @@ begin  -- architecture rtl
 
   begin
     -- Test write
-    do_write(X"3", X"2");
-    assert_read(X"3", X"2");
-    do_write(X"1", X"4");
-    assert_read(X"1", X"4");
+    for i in 0 to ADDR_WIDTH - 1 loop
+      for j in 0 to DATA_WIDTH - 1 loop
+        do_write(conv_std_logic_vector(i, ADDR_WIDTH),
+                 conv_std_logic_vector(j, DATA_WIDTH));
+        assert_read(conv_std_logic_vector(i, ADDR_WIDTH),
+                    conv_std_logic_vector(j, DATA_WIDTH));
+      end loop;
+    end loop;
     assert false report "end of test" severity note;
     wait;
   end process;   

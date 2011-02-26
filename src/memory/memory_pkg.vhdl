@@ -24,4 +24,38 @@ package memory_pkg is
       input  : in  memory_input;
       output : out memory_output);
   end component memory_impl;
+
+  function CONV_STD_LOGIC_VECTOR(ARG: INTEGER; SIZE: INTEGER) return STD_LOGIC_VECTOR;
+
 end package memory_pkg;
+
+package body memory_pkg is
+
+  -- convert an integer to an STD_LOGIC_VECTOR
+  function CONV_STD_LOGIC_VECTOR(ARG: INTEGER; SIZE: INTEGER) return STD_LOGIC_VECTOR is
+	variable result: STD_LOGIC_VECTOR (SIZE-1 downto 0);
+	variable temp: integer;
+	-- synopsys built_in SYN_INTEGER_TO_BIT_VECTOR
+	-- synopsys subpgm_id 381
+    begin
+	-- synopsys synthesis_off
+	temp := ARG;
+	for i in 0 to SIZE-1 loop
+	    if (temp mod 2) = 1 then
+		result(i) := '1';
+	    else 
+		result(i) := '0';
+	    end if;
+	    if temp > 0 then
+		temp := temp / 2;
+	    elsif (temp > integer'low) then
+		temp := (temp - 1) / 2; -- simulate ASR
+	    else
+		temp := temp / 2; -- simulate ASR
+	    end if;
+	end loop;
+	return result;
+	-- synopsys synthesis_on
+  end;
+
+end;
