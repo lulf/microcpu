@@ -27,16 +27,24 @@ begin  -- architecture rtl
       wait until rising_edge(clk_i);
       assert m_out.out_read_data = expected report "Value read is not expected" severity failure;
     end procedure;
+
+    procedure do_write(constant addr : in std_logic_vector(ADDR_WIDTH - 1 downto 0);
+                       constant data : in std_logic_vector(DATA_WIDTH - 1 downto 0))
+                       is
+    begin
+      m_in.in_write_address <= addr;
+      m_in.in_write_data <= data;
+      m_in.in_write_enable <= '1';
+      wait until rising_edge(clk_i);
+      m_in.in_write_enable <= '0';
+    end procedure;
+
   begin
     -- Test write
-    m_in.in_write_address <= X"3";
-    m_in.in_write_data <= X"2";
-    m_in.in_write_enable <= '1';
-    wait until rising_edge(clk_i);
-    m_in.in_write_enable <= '0';
-    wait until rising_edge(clk_i);
+    do_write(X"3", X"2");
     assert_read(X"3", X"2");
-    assert_read(X"2", X"1");
+    do_write(X"1", X"4");
+    assert_read(X"1", X"4");
     assert false report "end of test" severity note;
     wait;
   end process;   
