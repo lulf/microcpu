@@ -31,6 +31,24 @@ end package memory_pkg;
 
 package body memory_pkg is
 
+  -- Taken from http://www.cs.sfu.ca/~ggbaker/reference/std_logic/arith/std_logic_arith.vhd
+  -- The following copyright applies to the following function
+  --------------------------------------------------------------------------
+  --                                                                      --
+  -- Copyright (c) 1990,1991,1992 by Synopsys, Inc.  All rights reserved. --
+  --                                                                      --
+  -- This source file may be used and distributed without restriction     --
+  -- provided that this copyright statement is not removed from the file  --
+  -- and that any derivative work contains this copyright notice.         --
+  --                                                                      --
+  --  Package name: STD_LOGIC_ARITH         --
+  --                  --
+  --  Purpose:              --
+  --   A set of arithemtic, conversion, and comparison functions  --
+  --   for SIGNED, UNSIGNED, SMALL_INT, INTEGER,      --
+  --   STD_ULOGIC, STD_LOGIC, and STD_LOGIC_VECTOR.     --
+  --                  --
+  --------------------------------------------------------------------------
   -- convert an integer to an STD_LOGIC_VECTOR
   function CONV_STD_LOGIC_VECTOR(ARG: INTEGER; SIZE: INTEGER) return STD_LOGIC_VECTOR is
 	variable result: STD_LOGIC_VECTOR (SIZE-1 downto 0);
